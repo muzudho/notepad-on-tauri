@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { invoke } from "@tauri-apps/api/core";
+import { open } from '@tauri-apps/plugin-dialog';
 
+const filePathVM = ref("C:\\Users\\muzud\\OneDrive\\ドキュメント\\temp");
 const textVM = ref("");
 
 async function on_open_button_clicked() {
   console.log("［Open］ボタンを押したぜ。")
+  // Open a dialog
+  const filePath = await open({
+    multiple: false,
+    directory: false,
+  });
+  filePathVM.value = filePath
 }
 
 async function on_save_button_clicked() {
@@ -20,7 +28,7 @@ async function on_load_button_clicked() {
 <template>
   <main class="container">
     <div class="row">
-      <input style="width:80%; height: 10vh;" value="C:\\Users\\muzud\\OneDrive\\ドキュメント\\temp">
+      <input style="width:80%; height: 10vh;" :value="filePathVM">
       <button @click="on_open_button_clicked" style="width:20%; height: 10vh;">Open</button>
     </div>
     <div class="row">
