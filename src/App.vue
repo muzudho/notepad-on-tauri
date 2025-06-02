@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { invoke } from "@tauri-apps/api/core";
 import { open } from '@tauri-apps/plugin-dialog';
-import { readTextFile } from '@tauri-apps/plugin-fs';
+import { readTextFile, writeTextFile } from '@tauri-apps/plugin-fs';
 import * as path from '@tauri-apps/api/path';
 
 const filePathVM = ref("C:\\Users\\muzud\\OneDrive\\ドキュメント\\temp");
@@ -21,6 +21,8 @@ async function on_open_button_clicked() {
 
 async function on_save_button_clicked() {
   console.log("［Save］ボタンを押したぜ。")
+  // 書き込むためには、📄 `src-tauri/capabilities/default.json` ファイルの `permissions` を設定する必要がある。
+  await writeTextFile(filePathVM.value, textVM.value);
 }
 
 async function on_load_button_clicked() {
@@ -40,7 +42,7 @@ async function on_load_button_clicked() {
       <button @click="on_save_button_clicked" style="width:50%; height: 10vh;">Save</button>
       <button @click="on_load_button_clicked" style="width:50%; height: 10vh;">Load</button>
     </div>
-    <textarea style="width:100%; height:80vh;">{{ textVM }}</textarea>
+    <textarea style="width:100%; height:80vh;" v-model="textVM"></textarea>
   </main>
 </template>
 

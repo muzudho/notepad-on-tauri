@@ -9,6 +9,11 @@
     "core:default",
     "opener:default",
     "dialog:default",
-    "fs:default"
+    "fs:default",
+    "fs:write-all",
+    {
+      "identifier": "fs:scope",
+      "allow": [{ "path": "$HOME" }, { "path": "$HOME/**" }]
+    }
   ]
 }
