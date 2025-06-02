@@ -12,6 +12,7 @@ async function on_open_button_clicked() {
   const filePath = await open({
     multiple: false,
     directory: false,
+    defaultPath: filePathVM.value
   });
   filePathVM.value = filePath
 }
