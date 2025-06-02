@@ -2,6 +2,8 @@
 import { ref } from "vue";
 import { invoke } from "@tauri-apps/api/core";
 import { open } from '@tauri-apps/plugin-dialog';
+import { readTextFile } from '@tauri-apps/plugin-fs';
+import * as path from '@tauri-apps/api/path';
 
 const filePathVM = ref("C:\\Users\\muzud\\OneDrive\\ドキュメント\\temp");
 const textVM = ref("");
@@ -23,6 +25,8 @@ async function on_save_button_clicked() {
 
 async function on_load_button_clicked() {
   console.log("［Load］ボタンを押したぜ。")
+  const contents = await readTextFile(filePathVM.value);  
+  textVM.value = contents
 }
 </script>
 
