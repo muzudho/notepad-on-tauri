@@ -4,13 +4,15 @@ import { invoke } from "@tauri-apps/api/core";
 
 const textVM = ref("");
 
+async function on_open_button_clicked() {
+  console.log("［Open］ボタンを押したぜ。")
+}
+
 async function on_save_button_clicked() {
-  //textVM.value = "［Save］ボタンを押したぜ。"
   console.log("［Save］ボタンを押したぜ。")
 }
 
 async function on_load_button_clicked() {
-  //textVM.value = "［Load］ボタンを押したぜ。"
   console.log("［Load］ボタンを押したぜ。")
 }
 </script>
@@ -18,10 +20,14 @@ async function on_load_button_clicked() {
 <template>
   <main class="container">
     <div class="row">
+      <input style="width:80%; height: 10vh;" value="C:\\Users\\muzud\\OneDrive\\ドキュメント\\temp">
+      <button @click="on_open_button_clicked" style="width:20%; height: 10vh;">Open</button>
+    </div>
+    <div class="row">
       <button @click="on_save_button_clicked" style="width:50%; height: 10vh;">Save</button>
       <button @click="on_load_button_clicked" style="width:50%; height: 10vh;">Load</button>
     </div>
-    <textarea style="width:100%; height:90vh;">{{ textVM }}</textarea>
+    <textarea style="width:100%; height:80vh;">{{ textVM }}</textarea>
   </main>
 </template>
 
@@ -43,7 +49,7 @@ async function on_load_button_clicked() {
 }
 
 .container {
-  height: 97vh;
+  height: 95vh;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -56,21 +62,10 @@ async function on_load_button_clicked() {
   justify-content: center;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-
-a:hover {
-  color: #535bf2;
-}
-
 input,
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
@@ -81,6 +76,7 @@ button {
 }
 
 button {
+  padding: 0.6em 1.2em;
   cursor: pointer;
 }
 
@@ -101,10 +97,6 @@ button {
   :root {
     color: #f6f6f6;
     background-color: #2f2f2f;
-  }
-
-  a:hover {
-    color: #24c8db;
   }
 
   input,
