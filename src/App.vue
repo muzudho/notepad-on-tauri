@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { invoke } from "@tauri-apps/api/core";
 import { open } from '@tauri-apps/plugin-dialog';
-import { readTextFile, writeTextFile } from '@tauri-apps/plugin-fs';
 import * as path from '@tauri-apps/api/path';
+import { readTextFile, writeTextFile } from '@tauri-apps/plugin-fs';
+import { ref } from "vue";
 
 const filePathVM = ref("C:\\Users\\muzud\\OneDrive\\ドキュメント\\temp");
 const textVM = ref("");
 
-async function on_open_button_clicked() {
+async function onOpenButtonClicked() {
   console.log("［Open］ボタンを押したぜ。")
   // Open a dialog
   const filePath = await open({
@@ -19,13 +19,13 @@ async function on_open_button_clicked() {
   filePathVM.value = filePath
 }
 
-async function on_save_button_clicked() {
+async function onSaveButtonClicked() {
   console.log("［Save］ボタンを押したぜ。")
   // 書き込むためには、📄 `src-tauri/capabilities/default.json` ファイルの `permissions` を設定する必要がある。
   await writeTextFile(filePathVM.value, textVM.value);
 }
 
-async function on_load_button_clicked() {
+async function onLoadButtonClicked() {
   console.log("［Load］ボタンを押したぜ。")
   const contents = await readTextFile(filePathVM.value);  
   textVM.value = contents
@@ -36,11 +36,11 @@ async function on_load_button_clicked() {
   <main class="container">
     <div class="row">
       <input style="width:80%; height: 10vh;" :value="filePathVM">
-      <button @click="on_open_button_clicked" style="width:20%; height: 10vh;">Open</button>
+      <button @click="onOpenButtonClicked" style="width:20%; height: 10vh;">Open</button>
     </div>
     <div class="row">
-      <button @click="on_save_button_clicked" style="width:50%; height: 10vh;">Save</button>
-      <button @click="on_load_button_clicked" style="width:50%; height: 10vh;">Load</button>
+      <button @click="onSaveButtonClicked" style="width:50%; height: 10vh;">Save</button>
+      <button @click="onLoadButtonClicked" style="width:50%; height: 10vh;">Load</button>
     </div>
     <textarea style="width:100%; height:80vh;" v-model="textVM"></textarea>
   </main>
