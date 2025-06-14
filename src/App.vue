@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { invoke } from "@tauri-apps/api/core";
+//import { invoke } from "@tauri-apps/api/core";
 import { open } from '@tauri-apps/plugin-dialog';
-import * as path from '@tauri-apps/api/path';
+//import * as path from '@tauri-apps/api/path';
 import { readTextFile, writeTextFile } from '@tauri-apps/plugin-fs';
 import { ref } from "vue";
 
@@ -16,7 +16,7 @@ async function onOpenButtonClicked() {
     directory: false,
     defaultPath: filePathVM.value
   });
-  filePathVM.value = filePath
+  filePathVM.value = filePath ?? "";  // ファイルパス取得に失敗したら空文字列。
 }
 
 async function onSaveButtonClicked() {
