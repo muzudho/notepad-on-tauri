@@ -1,3 +1,17 @@
+<template>
+    <main class="container">
+        <div class="row">
+            <input style="width:80%; height: 10vh;" :value="filePathVM">
+            <button @click="onOpenButtonClicked" style="width:20%; height: 10vh;">Open</button>
+        </div>
+        <div class="row">
+            <button @click="onSaveButtonClicked" style="width:50%; height: 10vh;">Save</button>
+            <button @click="onLoadButtonClicked" style="width:50%; height: 10vh;">Load</button>
+        </div>
+        <textarea style="width:100%; height:80vh;" v-model="textVM"></textarea>
+    </main>
+</template>
+
 <script setup lang="ts">
     //import { invoke } from "@tauri-apps/api/core";
     import { open } from '@tauri-apps/plugin-dialog';
@@ -32,20 +46,6 @@
         textVM.value = contents
     }
 </script>
-
-<template>
-    <main class="container">
-        <div class="row">
-            <input style="width:80%; height: 10vh;" :value="filePathVM">
-            <button @click="onOpenButtonClicked" style="width:20%; height: 10vh;">Open</button>
-        </div>
-        <div class="row">
-            <button @click="onSaveButtonClicked" style="width:50%; height: 10vh;">Save</button>
-            <button @click="onLoadButtonClicked" style="width:50%; height: 10vh;">Load</button>
-        </div>
-        <textarea style="width:100%; height:80vh;" v-model="textVM"></textarea>
-    </main>
-</template>
 
 <style>
     :root {
